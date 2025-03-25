@@ -24,7 +24,7 @@ const [todoList, setTodoList] = useState([{
 
   return (
     <div>
-    <div>
+    <div className='relative'>
     <h1 className='text-3xl font-semibold text-center m-5'>TODO LIST</h1>
     </div>
     <div className='flex justify-center'>
