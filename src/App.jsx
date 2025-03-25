@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import TodoCard from './todoCard';
 
 function App() {
 
@@ -9,15 +10,15 @@ const [todoItem, setTodoItem] = useState({
 })
 
 const [todoList, setTodoList] = useState([{
-  task: "Wake up Early",
+  task: "Learn ReactJs & complete the assignments.",
   priority: "High"
 },
 {
-  task: "Wake up Early",
+  task: "Learn AWS",
   priority: "Medium"
 },
 {
-  task: "Wake up Early",
+  task: "Learn how to use Figma",
   priority: "Low"
 },])
 
@@ -80,12 +81,14 @@ const [todoList, setTodoList] = useState([{
     <div>
     {todoList.map((taskItem, index)=>{
       const { task , priority} = taskItem;
+      
       return(
-        <div key={index} className='relative bg-gray-300 m-5 border border-gray-400 rounded-lg shadow-lg py-4 pl-7'>
-        <h1 className='text-2xl'>{task}</h1>
-        <p className='absolute top-5 right-9 border border-gray-400 p-2'>{priority}</p>
-        </div>
-      )
+       <TodoCard 
+       key={index}
+       task={task} 
+       priority={priority}/>
+      );
+
     })}
     </div>
     </div>
