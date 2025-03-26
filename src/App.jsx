@@ -35,15 +35,15 @@ toast.success("Task deleted successfully");
 return (
   <div>
   <div className='relative'>
-  <h1 className='text-xl md:text-3xl font-semibold text-center m-5'>TODO LIST</h1>
+  <h1 className='text-sm md:text-3xl font-semibold text-center m-5'>TODO LIST</h1>
   </div>
   <div className='flex justify-center'>
   <input type="text" 
-  placeholder='Add your task or note here' 
+  placeholder='Add your task or note' 
   className='border
    border-gray-400
   outline-none
-  w-[250px] md:w-1/2
+  w-[200px] md:w-1/2
   py-2 md:py-4 px-4 
   rounded-lg shadow-lg 
     '
@@ -54,11 +54,11 @@ return (
   })}}
   value={todoItem.task}/>
 
-  <select className='ml-2 md:ml-5 border 
+  <select className='ml-1 md:ml-4 border 
    border-gray-400
   outline-none
   rounded-lg shadow-lg
-  px-2 md:px-4 pr-2 cursor-pointer'
+  px-1 md:px-4 pr-1 cursor-pointer'
   onChange={(e)=>{
   setTodoItem({
   ...todoItem,
@@ -71,7 +71,7 @@ return (
     <option value={"Medium"}>Medium</option>
     <option value={"Low"}>Low</option>
     </select>
-   <button className='border ml-2 md:ml-5 px-4 md:px-8
+   <button className='border ml-1 md:ml-4 px-3 md:px-8
     border-gray-400
     outline-none
     rounded-lg shadow-lg
