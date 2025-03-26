@@ -3,9 +3,7 @@ import { useState } from 'react';
 import TodoCard from './todoCard';
 import toast, {Toaster} from 'react-hot-toast';
 
-
 function App() {
-
 const [todoItem, setTodoItem] = useState({
   task:"",
   priority:"",
@@ -15,58 +13,58 @@ const [todoList, setTodoList] = useState([]);
 const[selectedTab, setSelectedTab] = useState("All");
 
 useEffect(() => {
-  if (todoList.length == 0) return;
-  localStorage.setItem("todoList", JSON.stringify(todoList));
+if (todoList.length == 0) return;
+localStorage.setItem("todoList", JSON.stringify(todoList));
 }, [todoList]);
 
 
 useEffect(() => {
-  const listFromLS = JSON.parse(localStorage.getItem("todoList") || "[]");
+const listFromLS = JSON.parse(localStorage.getItem("todoList") || "[]");
   setTodoList(listFromLS);
 }, []);
 
 
 const onDelete = (index)=>{
-  const listAfterDeletion = todoList.filter((_,i)=> i!==index);
+const listAfterDeletion = todoList.filter((_,i)=> i!==index);
   setTodoList(listAfterDeletion);
   toast.success("Task deleted successfully");
 };
 
 
-  return (
-    <div>
-    <div className='relative'>
-    <h1 className='text-xl md:text-3xl font-semibold text-center m-5'>TODO LIST</h1>
-    </div>
-    <div className='flex justify-center'>
-    <input type="text" 
-    placeholder='Add your task or note here' 
-    className='border
-     border-gray-400
-    outline-none
-    w-[250px] md:w-1/2
-     py-2 md:py-4 px-4 
-    rounded-lg shadow-lg 
+return (
+  <div>
+  <div className='relative'>
+  <h1 className='text-xl md:text-3xl font-semibold text-center m-5'>TODO LIST</h1>
+  </div>
+  <div className='flex justify-center'>
+  <input type="text" 
+  placeholder='Add your task or note here' 
+  className='border
+   border-gray-400
+  outline-none
+  w-[250px] md:w-1/2
+  py-2 md:py-4 px-4 
+  rounded-lg shadow-lg 
     '
-    onChange={(e)=>{
-      setTodoItem({
-        ...todoItem,
-        task: e.target.value
-      })}}
-      value={todoItem.task}/>
+  onChange={(e)=>{
+  setTodoItem({
+  ...todoItem,
+  task: e.target.value
+  })}}
+  value={todoItem.task}/>
 
-    <select className='ml-2 md:ml-5 border 
-     border-gray-400
-    outline-none
-    rounded-lg shadow-lg
-    px-2 md:px-4 pr-2 cursor-pointer'
-    onChange={(e)=>{
-      setTodoItem({
-        ...todoItem,
-        priority: e.target.value
-      })
-    }}
-    value={todoItem.priority}>
+  <select className='ml-2 md:ml-5 border 
+   border-gray-400
+  outline-none
+  rounded-lg shadow-lg
+  px-2 md:px-4 pr-2 cursor-pointer'
+  onChange={(e)=>{
+  setTodoItem({
+  ...todoItem,
+  priority: e.target.value
+  })
+  }}
+  value={todoItem.priority}>
      <option value={""}>Select Priority</option>
     <option value={"High"}>High</option>
     <option value={"Medium"}>Medium</option>
@@ -136,9 +134,8 @@ return (
   })}
 </div>
 
-    <Toaster/>
-    </div>
-    
+<Toaster/>
+</div> 
   )
 }
 
