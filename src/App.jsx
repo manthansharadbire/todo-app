@@ -10,7 +10,8 @@ const [todoItem, setTodoItem] = useState({
   priority:"",
 })
 
-const [todoList, setTodoList] = useState([])
+const [todoList, setTodoList] = useState([]);
+const[selectTab, setSelectedTab] = useState("All");
 
 useEffect(() => {
   if (todoList.length == 0) return;
@@ -100,6 +101,13 @@ const onDelete = (index)=>{
     }
     }>
     Add</button>
+    </div>
+    <div className='justify-evenly m-5 flex border-b-2 border-b-gray-400 '>
+      {["All", "High", "Medium", "Low"].map((tab, i)=>{
+return (
+  <span className='bg-blue-300 block w-[100px] h-[40px] text-center p-2 rounded-t-xl hover:bg-blue-400 cursor-pointer' key={i}>{tab}</span>
+);
+      })}
     </div>
     <div>
   {todoList.map((taskItem, index) => {
