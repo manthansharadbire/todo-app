@@ -34,16 +34,16 @@ toast.success("Task deleted successfully");
 
 return (
   <div>
-  <div className='relative'>
+  <div className=''>
   <h1 className='text-sm md:text-3xl font-semibold text-center m-5'>TODO LIST</h1>
   </div>
   <div className='flex justify-center'>
   <input type="text" 
-  placeholder='Add your task or note' 
+  placeholder='Add your task' 
   className='border
    border-gray-400
   outline-none
-  w-[200px] md:w-1/2
+  w-[140px] md:w-1/2
   py-2 md:py-4 px-4 
   rounded-lg shadow-lg 
     '
@@ -66,7 +66,7 @@ return (
   })
   }}
   value={todoItem.priority}>
-    <option value={""}>Select Priority</option>
+    <option value={""}>Priority</option>
     <option value={"High"}>High</option>
     <option value={"Medium"}>Medium</option>
     <option value={"Low"}>Low</option>
@@ -77,7 +77,7 @@ return (
     rounded-lg shadow-lg
     bg-blue-400
     hover:bg-blue-500
-    cursor-pointer'
+    cursor-pointe text-white'
 
     onClick={()=>
     {
@@ -105,7 +105,7 @@ return (
     <div className='justify-evenly m-5 flex border-b-2 border-b-gray-400 '>
       {["All", "High", "Medium", "Low"].map((tab, i)=>{
    return (
-  <span className={`  block w-[80px] md:w-[100px] h-[30px] md:h-[40px] text-center p-1.5 md:p-2 rounded-t-xl  cursor-pointer text-sm md:text-xl
+  <span className={` block w-[60px] md:w-[100px] h-[30px] md:h-[40px] text-center p-2 md:p-2 rounded-t-xl  cursor-pointer text-xs md:text-xl
     ${
     tab == selectedTab ? " bg-blue-400" : "bg-gray-300"
   }`}
