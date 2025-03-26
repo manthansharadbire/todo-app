@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import TodoCard from './todoCard';
+import CardTodo from './CardTodo';
+
 import toast, {Toaster} from 'react-hot-toast';
 
 function App() {
@@ -20,14 +21,14 @@ localStorage.setItem("todoList", JSON.stringify(todoList));
 
 useEffect(() => {
 const listFromLS = JSON.parse(localStorage.getItem("todoList") || "[]");
-  setTodoList(listFromLS);
+setTodoList(listFromLS);
 }, []);
 
 
 const onDelete = (index)=>{
 const listAfterDeletion = todoList.filter((_,i)=> i!==index);
-  setTodoList(listAfterDeletion);
-  toast.success("Task deleted successfully");
+setTodoList(listAfterDeletion);
+toast.success("Task deleted successfully");
 };
 
 
@@ -65,7 +66,7 @@ return (
   })
   }}
   value={todoItem.priority}>
-     <option value={""}>Select Priority</option>
+    <option value={""}>Select Priority</option>
     <option value={"High"}>High</option>
     <option value={"Medium"}>Medium</option>
     <option value={"Low"}>Low</option>
@@ -80,30 +81,30 @@ return (
 
     onClick={()=>
     {
-      if(!todoItem.task){
-        toast.error("Please enter task");
-        return;
+    if(!todoItem.task){
+    toast.error("Please enter task");
+    return;
       }
       
-        if(!todoItem.priority){
-          toast.error("Please select priority");
-          return;
-        }
+    if(!todoItem.priority){
+    toast.error("Please select priority");
+    return;
+    }
 
       
-      setTodoList([todoItem, ...todoList]);
-      setTodoItem({
-        task:"",
-        priority:"",
-      });
-      toast.success("Task added successfully")
+    setTodoList([todoItem, ...todoList]);
+    setTodoItem({
+    task:"",
+    priority:"",
+    });
+    toast.success("Task added successfully")
     }
     }>
     Add</button>
     </div>
     <div className='justify-evenly m-5 flex border-b-2 border-b-gray-400 '>
       {["All", "High", "Medium", "Low"].map((tab, i)=>{
-return (
+   return (
   <span className={`  block w-[80px] md:w-[100px] h-[30px] md:h-[40px] text-center p-1.5 md:p-2 rounded-t-xl  cursor-pointer text-sm md:text-xl
     ${
     tab == selectedTab ? " bg-blue-400" : "bg-gray-300"
@@ -113,24 +114,24 @@ return (
     {tab}
     </span>
 );
-      })}
-    </div>
-    <div>
+  })}
+  </div>
+  <div>
   {todoList.map((taskItem, index) => {
-    const { task, priority } = taskItem;
+  const { task, priority } = taskItem;
 
-    if(selectedTab != "All" &&  priority!= selectedTab){
-      return null;
-    }
-    return (
-      <TodoCard
-        key={index}
-        index={index}
-        task={task}
-        priority={priority}
-        onDelete={onDelete}
-      />
-    );
+  if(selectedTab != "All" &&  priority!= selectedTab){
+  return null;
+  }
+ return (
+  <CardTodo
+  key={index}
+  index={index}
+  task={task}
+  priority={priority}
+  onDelete={onDelete}
+  />
+  );
   })}
 </div>
 
