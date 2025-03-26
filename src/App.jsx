@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import TodoCard from './todoCard';
+import toast, {Toaster} from 'react-hot-toast';
 
 function App() {
 
@@ -9,28 +10,25 @@ const [todoItem, setTodoItem] = useState({
   priority:"",
 })
 
-const [todoList, setTodoList] = useState([{
-  task: "Learn ReactJs & complete the assignments.",
-  priority: "High"
-},
-{
-  task: "Learn AWS",
-  priority: "Medium"
-},
-{
-  task: "Learn how to use Figma",
-  priority: "Low"
-},])
+const [todoList, setTodoList] = useState([])
 
-useEffect(()=>{
-  if(todoList.length == 0)return;
-localStorage.setItem("todoList", JSON.stringify(todoList))
-},[todoList]);
+useEffect(() => {
+  if (todoList.length == 0) return;
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+}, [todoList]);
 
-useEffect(()=>{
-  const listFromLS = JSON.parse (localStorage.getItem ("todoList") || "[]");
-  setTodoList(listFromLS)
-},[]);
+
+useEffect(() => {
+  const listFromLS = JSON.parse(localStorage.getItem("todoList") || "[]");
+  setTodoList(listFromLS);
+}, []);
+
+
+const onDelete = (index)=>{
+  const listAfterDeletion = todoList.filter((_,i)=> i!==index);
+  setTodoList(listAfterDeletion);
+  toast.success("Task deleted successfully");
+};
 
 
   return (
@@ -46,7 +44,7 @@ useEffect(()=>{
     outline-none
     w-1/2
     py-4 px-4 
-    rounded-lg shadow-lg
+    rounded-full shadow-lg
     '
     onChange={(e)=>{
       setTodoItem({
@@ -58,7 +56,7 @@ useEffect(()=>{
     <select className='ml-5 border 
      border-gray-400
     outline-none
-    rounded-lg shadow-lg
+    rounded-full shadow-lg
     px-4 pr-2 cursor-pointer'
     onChange={(e)=>{
       setTodoItem({
@@ -75,33 +73,51 @@ useEffect(()=>{
    <button className='border ml-5 px-8
     border-gray-400
     outline-none
-    rounded-lg shadow-lg
+    rounded-full shadow-lg
     bg-blue-400
     hover:bg-blue-500
     cursor-pointer'
+
     onClick={()=>
-    {setTodoList([todoItem, ...todoList]);
+    {
+      if(!todoItem.task){
+        toast.error("Please enter task");
+        return;
+      }
+      
+        if(!todoItem.priority){
+          toast.error("Please select priority");
+          return;
+        }
+
+      
+      setTodoList([todoItem, ...todoList]);
       setTodoItem({
         task:"",
         priority:"",
-      })
+      });
+      toast.success("Task added successfully")
     }
     }>
     Add</button>
     </div>
     <div>
-    {todoList.map((taskItem, index)=>{
-      const { task , priority} = taskItem;
-      
-      return(
-       <TodoCard 
-       key={index}
-       task={task} 
-       priority={priority}/>
-      );
+  {todoList.map((taskItem, index) => {
+    const { task, priority } = taskItem;
 
-    })}
-    </div>
+    return (
+      <TodoCard
+        key={index}
+        index={index}
+        task={task}
+        priority={priority}
+        onDelete={onDelete}
+      />
+    );
+  })}
+</div>
+
+    <Toaster/>
     </div>
     
   )
