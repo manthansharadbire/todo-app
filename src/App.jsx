@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import TodoCard from './todoCard';
 
@@ -21,6 +21,17 @@ const [todoList, setTodoList] = useState([{
   task: "Learn how to use Figma",
   priority: "Low"
 },])
+
+useEffect(()=>{
+  if(todoList.length == 0)return;
+localStorage.setItem("todoList", JSON.stringify(todoList))
+},[todoList]);
+
+useEffect(()=>{
+  const listFromLS = JSON.parse (localStorage.getItem ("todoList") || "[]");
+  setTodoList(listFromLS)
+},[]);
+
 
   return (
     <div>
